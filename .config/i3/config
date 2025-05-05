@@ -213,3 +213,6 @@ for_window [class="(?i)blueman"] floating enable
 
 # rofi power menu
 bindsym $mod+p exec rofi -show powermenu -modi powermenu:~/.config/rofi/rofi-power-menu.sh
+
+# Background Apps
+exec --no-startup-id 1password --no-ui
