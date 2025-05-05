@@ -216,3 +216,4 @@ bindsym $mod+p exec rofi -show powermenu -modi powermenu:~/.config/rofi/rofi-pow
 
 # Background Apps
 exec --no-startup-id 1password --no-ui
+exec --no-startup-id ~/.local/bin/bootstrap.sh # Caps Lock Delay Fix
