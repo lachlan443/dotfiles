@@ -49,7 +49,14 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec wezterm
+
+# Application Hotkeys
+bindsym $mod+F1 exec google-chrome
+bindsym $mod+F2 exec flatpak run org.kde.dolphin
+
+
+
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -135,7 +142,8 @@ bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+# bindsym $mod+0 workspace number $ws10
+bindsym $mod+0 exec --no-startup-id i3-msg "workspace number 10"; exec --no-startup-id spotify
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -197,5 +205,11 @@ bar {
 exec --no-startup-id nitrogen --set-zoom-fill /usr/share/backgrounds/linuxmint-wallpapers/mfakurian_heart.jpg
 
 ## Mouse DPI, Run ratbagctl to find mice names.
-exec_always --no-startup-id ratbagctl singing-gundi dpi set 800 # MX Master
-exec_always --no-startup-id ratbagctl thundering-gerbil dpi set 800 # G502
+exec --no-startup-id ratbagctl singing-gundi dpi set 800 # MX Master
+exec --no-startup-id ratbagctl thundering-gerbil dpi set 800 # G502
+
+# Floating Windows
+for_window [class="(?i)blueman"] floating enable
+
+# rofi power menu
+bindsym $mod+p exec rofi -show powermenu -modi powermenu:~/.config/rofi/rofi-power-menu.sh
