@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PACKAGE_FILE=".additional_packages.txt"
+PACKAGE_FILE=".post_install_packages.txt"
 
 # Check if package list file exists
 if [[ ! -f "$PACKAGE_FILE" ]]; then
