@@ -117,5 +117,3 @@ if ! shopt -oq posix; then
 fi
 
 eval "$(starship init bash)"
-
-export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
