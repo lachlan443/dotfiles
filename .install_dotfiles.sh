@@ -5,29 +5,8 @@ function config {
 }
 mkdir -p .config-backup
 config config --local status.showUntrackedFiles no
-config checkout # Attempt to check out the dotfiles
-if [ $? -ne 0 ]; then # If checkout fails, handle conflicts
-  echo ""
-  echo "⚠️  Some files would be overwritten by checkout:"
-  conflicted_files=$(config checkout 2>&1 | grep -E "^\s+\." | awk '{print $1}')
-#  echo "$conflicted_files"
-  echo ""
-  
-  read -p "Do you want to OVERRIDE these files? [Y/n] " confirm
-  if [[ "$confirm" =~ ^[Yy]$ ]]; then
-    echo "Deleting conflicting files..."
-    while IFS= read -r file; do
-      rm -rf "$HOME/$file"
-    done <<< "$conflicted_files"
-  else
-    echo "Aborting setup. No files were deleted."
-    exit 1
-  fi
-fi
-while ! config checkout; do # Try checkout again
-  echo ""
-  echo "❗ Some files are still blocking checkout."
-  read -p "Please delete the remaining files manually in another terminal. Retry? [Y/n] " retry
-  [[ "$retry" =~ ^[Yy]$ ]] || { echo "Aborting."; exit 1; }
-done
-echo "Dotfiles setup complete."
+
+# Force checkout and overwrite existing files
+config checkout -f .  # This will force overwrite any conflicting files
+
+echo "Dotfiles install complete."
