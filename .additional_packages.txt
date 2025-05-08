@@ -1,0 +1,24 @@
+# System utilities
+blueman             # bluetooth
+brightnessctl       # brightness
+pasystray           # pulse audio system tray
+piper               # mouse dpi
+
+
+# other
+starship                    # terminal prompt
+ttf-jetbrains-mono-nerd     # nerd font icons for terminal 
+dolphin                     # files
+spotify-launcher
+chromium
+
+
+# CLI Tools
+htop            # system monitor
+curl            # transfer data from URLs
+tree            # displays directory trees
+neofetch        # system info
+
+# GUI Utilities
+gparted         # partition editor
+vlc             # media player

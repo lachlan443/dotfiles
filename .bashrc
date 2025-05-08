@@ -116,4 +116,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
 eval "$(starship init bash)"
