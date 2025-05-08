@@ -27,7 +27,7 @@ fi
 while ! config checkout; do # Try checkout again
   echo ""
   echo "❗ Some files are still blocking checkout."
-  read -p "Have you deleted the remaining files manually? Retry? [y/N] " retry
+  read -p "Please delete the remaining files manually in another terminal. Retry? [Y/n] " retry
   [[ "$retry" =~ ^[Yy]$ ]] || { echo "Aborting."; exit 1; }
 done
 echo "Dotfiles setup complete."
