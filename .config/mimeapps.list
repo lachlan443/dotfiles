@@ -1,3 +1,4 @@
+# /usr/share/applications for a list
 [Added Associations]
 image/x-xcursor=code-oss.desktop;
 
@@ -10,6 +11,6 @@ text/plain=code-oss.desktop;
 x-scheme-handler/file=org.kde.dolphin.desktop;
 x-scheme-handler/fish=org.kde.dolphin.desktop;
 x-scheme-handler/ftp=org.kde.dolphin.desktop;
-x-scheme-handler/http=org.kde.dolphin.desktop;
-x-scheme-handler/https=org.kde.dolphin.desktop;
+x-scheme-handler/http=chromium.desktop;
+x-scheme-handler/https=chromium.desktop;
 x-scheme-handler/sftp=org.kde.dolphin.desktop;
