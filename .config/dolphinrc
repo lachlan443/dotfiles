@@ -1,4 +1,5 @@
 [General]
+TerminalApplication=xfce4-terminal
 Version=202
 ViewPropsTimestamp=2025,5,8,1,3,5.074
 
@@ -8,6 +9,3 @@ Places Icons Static Size=22
 
 [MainWindow]
 MenuBar=Disabled
-
-[General]
-TerminalApplication=xfce4-terminal
