@@ -1,27 +1,34 @@
 #!/bin/bash
-
 PACKAGE_FILE=".post_install_packages.txt"
-
-# Check if package list file exists
-if [[ ! -f "$PACKAGE_FILE" ]]; then
-  echo "❌ Package list file '$PACKAGE_FILE' not found!"
-  exit 1
-fi
-
 echo "🔄 Updating package database..."
 sudo pacman -Sy
 
 echo "📦 Reading package list from $PACKAGE_FILE..."
-
-# Filter comments
-mapfile -t packages < <(grep -vE '^\s*#|^\s*$' "$PACKAGE_FILE" | sed 's/#.*//' | xargs -n1)
+mapfile -t packages < <(grep -vE '^\s*#|^\s*$' "$PACKAGE_FILE" | sed 's/#.*//' | xargs -n1)  # Filter comments
 
 echo "📥 Installing packages: ${packages[*]}"
 sudo pacman -S --needed --noconfirm "${packages[@]}"
 
-# Ensure screenshots folder exists
 echo "🔧 Creating Screenshots directory"
 mkdir -p ~/Pictures/Screenshots
 
+echo "🔧 Enabling Bluetooth"
+sudo systemctl enable bluetooth
+sudo systemctl start bluetooth
 
-echo "✅ Complete."
+# echo "🔧 Starting system tray applications"
+# blueman-applet &
+# nm-applet &
+# pasystray &
+# disown
+
+# echo "🔧 Patch Dolphin file associations"
+# if [ -f /etc/xdg/menus/plasma-applications.menu ]; then
+#     sudo cp /etc/xdg/menus/plasma-applications.menu /etc/xdg/menus/applications.menu
+# else
+#     sudo cp /etc/xdg/menus/arch-applications.menu /etc/xdg/menus/applications.menu
+# fi
+# kbuildsycoca6
+
+
+echo "✅ Complete. (run nvidia-inst for drivers.)"
