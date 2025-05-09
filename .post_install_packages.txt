@@ -16,6 +16,7 @@ kservice5			        # for dolphin
 spotify-launcher
 chromium
 code
+github-cli
 
 
 # CLI Tools

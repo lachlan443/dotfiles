@@ -32,3 +32,4 @@ sudo systemctl start bluetooth
 
 
 echo "✅ Complete"
+echo "run [gh auth login] for Git"
