@@ -103,7 +103,7 @@ bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/powermenu
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
 
 ## App shortcuts
-bindsym $mod+F1 exec --no-startup-id /usr/bin/chromium
+bindsym $mod+F1 exec --no-startup-id /usr/bin/firefox
 bindsym $mod+F2 exec --no-startup-id /usr/bin/dolphin
 bindsym Print exec --no-startup-id scrot ~/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png && notify-send "$(echo -e "Screenshot saved!\n ~/Pictures/Screenshots/$(date +"%Y-%m-%d-%T")-screenshot.png")"
 
