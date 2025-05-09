@@ -30,8 +30,8 @@ sudo systemctl start bluetooth
 # fi
 # kbuildsycoca6
 
-./.update_wallpaper.sh
-
+echo "🔧 Updating LightDM background wallpaper..."
+./.config/i3/wallpaper/update_lock_screen_wallpaper.sh
 
 
 echo "✅ Complete"
