@@ -14,7 +14,7 @@ kservice5			        # for dolphin
 # xdg-desktop-portal-kde      # for dolphin file association
 # archlinux-xdg-menu          # dolphin file association fallback
 spotify-launcher
-chromium
+#chromium
 code
 github-cli
 
