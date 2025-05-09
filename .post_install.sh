@@ -30,6 +30,9 @@ sudo systemctl start bluetooth
 # fi
 # kbuildsycoca6
 
+./.update_wallpaper.sh
+
+
 
 echo "✅ Complete"
 echo "run [gh auth login] for Git"
