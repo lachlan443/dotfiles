@@ -31,4 +31,4 @@ sudo systemctl start bluetooth
 # kbuildsycoca6
 
 
-echo "✅ Complete. (run nvidia-inst for drivers.)"
+echo "✅ Complete"

@@ -7,7 +7,7 @@ EndeavourOS, with i3wm
 ```
 curl -Ls https://dotfiles.lbanks.dev | /bin/bash
 ```
-then 
+install NVIDIA drivers and reboot before running post install. (`nvidia-inst`) 
 ```
 chmod +x ./.post_install.sh && ./.post_install.sh
 ```
