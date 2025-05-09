@@ -9,8 +9,13 @@ piper               # mouse dpi
 starship                    # terminal prompt
 ttf-jetbrains-mono-nerd     # nerd font icons for terminal 
 dolphin                     # files
+konsole			            # not used, but stops warning in dolphin
+kservice5			        # for dolphin
+# xdg-desktop-portal-kde      # for dolphin file association
+# archlinux-xdg-menu          # dolphin file association fallback
 spotify-launcher
 chromium
+code
 
 
 # CLI Tools
@@ -18,6 +23,7 @@ htop            # system monitor
 curl            # transfer data from URLs
 tree            # displays directory trees
 neofetch        # system info
+ncdu            # disk usage
 
 # GUI Utilities
 gparted         # partition editor
