@@ -1,5 +1,5 @@
 #!/bin/bash
-PACKAGE_FILE=".post_install_packages.txt"
+PACKAGE_FILE=".packages.txt"
 echo "🔄 Updating package database..."
 sudo pacman -Sy
 
