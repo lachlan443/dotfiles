@@ -28,7 +28,7 @@ sudo systemctl start bluetooth
 # else
 #     sudo cp /etc/xdg/menus/arch-applications.menu /etc/xdg/menus/applications.menu
 # fi
-# kbuildsycoca6
+kbuildsycoca6
 
 echo "🔧 Updating LightDM background wallpaper..."
 ./.config/i3/wallpaper/update_lock_screen_wallpaper.sh

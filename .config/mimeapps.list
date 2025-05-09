@@ -14,3 +14,4 @@ x-scheme-handler/ftp=org.kde.dolphin.desktop;
 x-scheme-handler/http=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
 x-scheme-handler/sftp=org.kde.dolphin.desktop;
+x-scheme-handler/anytype=anytype.desktop
