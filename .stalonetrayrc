@@ -1,0 +1,12 @@
+background "#1a1b26"
+vertical true 
+
+grow_gravity SW
+icon_gravity SW
+slot_size 48
+icon_size 32
+
+
+geometry 1x1-9-62
+window_type normal
+window_strut none
