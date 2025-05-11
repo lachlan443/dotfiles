@@ -1,6 +1,15 @@
-# /usr/share/applications for a list
 [Added Associations]
 image/x-xcursor=code-oss.desktop;
+x-scheme-handler/mailto=userapp-Thunderbird-U8F352.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-U8F352.desktop;
+x-scheme-handler/news=userapp-Thunderbird-SF5152.desktop;
+x-scheme-handler/snews=userapp-Thunderbird-SF5152.desktop;
+x-scheme-handler/nntp=userapp-Thunderbird-SF5152.desktop;
+x-scheme-handler/feed=userapp-Thunderbird-O20052.desktop;
+application/rss+xml=userapp-Thunderbird-O20052.desktop;
+application/x-extension-rss=userapp-Thunderbird-O20052.desktop;
+x-scheme-handler/webcal=userapp-Thunderbird-VI1X52.desktop;
+x-scheme-handler/webcals=userapp-Thunderbird-VI1X52.desktop;
 
 [Default Applications]
 application/x-directory=org.kde.dolphin.desktop;
@@ -15,3 +24,16 @@ x-scheme-handler/http=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
 x-scheme-handler/sftp=org.kde.dolphin.desktop;
 x-scheme-handler/anytype=anytype.desktop
+x-scheme-handler/mailto=userapp-Thunderbird-U8F352.desktop
+message/rfc822=userapp-Thunderbird-U8F352.desktop
+x-scheme-handler/mid=userapp-Thunderbird-U8F352.desktop
+x-scheme-handler/news=userapp-Thunderbird-SF5152.desktop
+x-scheme-handler/snews=userapp-Thunderbird-SF5152.desktop
+x-scheme-handler/nntp=userapp-Thunderbird-SF5152.desktop
+x-scheme-handler/feed=userapp-Thunderbird-O20052.desktop
+application/rss+xml=userapp-Thunderbird-O20052.desktop
+application/x-extension-rss=userapp-Thunderbird-O20052.desktop
+x-scheme-handler/webcal=userapp-Thunderbird-VI1X52.desktop
+text/calendar=userapp-Thunderbird-VI1X52.desktop
+application/x-extension-ics=userapp-Thunderbird-VI1X52.desktop
+x-scheme-handler/webcals=userapp-Thunderbird-VI1X52.desktop
