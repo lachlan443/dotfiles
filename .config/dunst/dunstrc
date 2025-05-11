@@ -42,7 +42,7 @@
     horizontal_padding = 8
     text_icon_padding = 0
     frame_width = 1
-    frame_color = "#7f3fbf"
+#    frame_color = "#7f3fbf"
     gap_size = 0
     separator_color = auto
     sort = yes
@@ -90,30 +90,35 @@
     mouse_middle_click = do_action, close_current
     mouse_right_click = close_all
 
+    frame_color = "#89b4fa"
+    separator_color= frame
+    highlight = "#89b4fa"
+
 [experimental]
     per_monitor_dpi = false
 
 
 [urgency_low]
-    background = "#28143c"
-    foreground = "#ffffff"
+    background = "#1e1e2e"
+    foreground = "#cdd6f4"
     timeout = 5
     icon = /usr/share/icons/Qogir/16/status/package-installed-outdated.svg
 
 [urgency_normal]
-    background = "#28143c"
-    foreground = "#ffffff"
+background = "#1e1e2e"
+foreground = "#cdd6f4"
     timeout = 5
     override_pause_level = 30
     icon = /usr/share/icons/Qogir/16/emblems/emblem-question.svg
 
 [urgency_critical]
-    background = "#28143c"
-    foreground = "#ffffff"
-    frame_color = "#ff7f7f"
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+frame_color = "#fab387"
     timeout = 120
     icon = /usr/share/icons/Qogir/16/actions/dialog-warning.svg
 
 [stack-volumes]
     appname = "some_volume_notifiers"
     set_stack_tag = "volume"
+
