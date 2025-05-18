@@ -1,18 +1,14 @@
 /*******************************************************
- * ROFI configs i3 keyhint-menu for EndeavourOS
+ * ROFI configs i3 powermenu for EndeavourOS
  * Maintainer: joekamprad [joekamprad //a_t// endeavouros.com]
  *******************************************************/
 configuration {
-    font:                "Noto Sans Regular 10";
-    show-icons:          false;
-    icon-theme:          "Qogir";
-    display-drun:        "KeyHint";
-    drun-display-format: "{name}";
-    scroll-method:       0;
-    disable-history:     false;
-    fullscreen:          false;
-    hide-scrollbar:      true;
-    sidebar-mode:        false;
+    font:            "Noto Sans Regular 18";
+    show-icons:      false;
+    icon-theme:      "Qogir";
+    scroll-method:   0;
+    disable-history: false;
+    sidebar-mode:    false;
 }
 
 @import "~/.config/rofi/config.rasi"
@@ -21,31 +17,17 @@ configuration {
 window {
     background-color: @background;
     border:           0;
-    padding:          30;
+    padding:          10;
+    transparency:     "real";
+    width:            220px;
+    location:         east;
+    /*y-offset:       18;*/
+    /*x-offset:       850;*/
 }
 listview {
-    lines:   10;
-    columns: 1;
-}
-mainbox {
-    border:  0;
-    padding: 0;
-}
-message {
-    border:       2px 0px 0px;
-    border-color: @separatorcolor;
-    padding:      1px;
-}
-textbox {
-    text-color: @foreground;
-}
-listview {
-    fixed-height: 0;
-    border:       8px 0px 0px;
-    border-color: @separatorcolor;
-    spacing:      8px;
-    scrollbar:    false;
-    padding:      2px 0px 0px;
+    lines:     7;
+    columns:   1;
+    scrollbar: false;
 }
 element {
     border:  0;
@@ -135,4 +117,9 @@ textbox-prompt-colon {
     str:        ":";
     margin:     0px 0.3em 0em 0em;
     text-color: @normal-foreground;
+}
+
+/*removes the text input line*/
+mainbox {
+  children: [listview];
 }

@@ -133,8 +133,6 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to update i3)
 bindsym $mod+Shift+r restart
 
-# keybinding in fancy rofi (automated):
-bindsym F1 exec --no-startup-id ~/.config/i3/scripts/keyhint-2
 
 # Backlight setting using dunst osc
 bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh brightness_up
@@ -533,12 +531,12 @@ exec_always --no-startup-id $HOME/.config/polybar/launch_polybar.sh &
 # bindsym $mod+space exec --no-startup-id rofi -modi drun -show drun \
 # 		-config ~/.config/rofi/rofidmenu.rasi
 
-bindsym $mod+space exec --no-startup-id $HOME/.config/rofi/launchers/type-1/launcher.sh
+bindsym $mod+space exec --no-startup-id $HOME/.config/rofi/launcher.sh
 
 
 # power-menu
 # bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/powermenu
-bindsym $mod+Shift+e exec --no-startup-id ~/.config/rofi/powermenu/type-1/powermenu.sh
+bindsym $mod+Shift+e exec --no-startup-id ~/.config/rofi/powermenu.sh
 
 
 # Power Profiles menu switcher
