@@ -1,124 +1,139 @@
-# customized dunst setup from EndeavourOS i3
-# https://github.com/endeavouros-team/endeavouros-i3wm-setup
-# See dunst(5) for all configuration options
-
 [global]
+    # Reload changes using `dunstctl reload`
+
     ### Display ###
-    monitor = 2
 
-    follow = none
+    # Display notifications on monitor with mouse focus
+    monitor = 0
+    follow = mouse
 
-    ### Geometry ###
-    width = 300
-    
-    # dynamic height from 0 to 300
-    # The maximum height of a single notification, excluding the frame.
-    height = (0, 300)
+    # Show number of hidden notifications
+    indicate_hidden = yes
+    notification_limit = 5
 
-    # Position the notification in the top right corner
-    origin = top-right
+    # Shrink window if smaller than width
+    shrink = yes
 
-    # Offset from the origin
-    # offset = (30, 40)
+    # Set {width}x{height} and {x_pos}+{y_pos}
+    # geometry = "300x30-5+60"
+    width = 450
+    progress_bar_max_width = 450
+    progress_bar_min_width = 450
+    progress_bar_height = 10
+    progress_bar_frame_width = 1
+    progress_bar_corner_radius = 5
+    min_icon_size = 48
+    max_icon_size = 48
+    corner_radius = 15
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
-    notification_limit = 5
 
-    ### Progress bar ###
-    progress_bar = true
-    progress_bar_height = 10
-    progress_bar_frame_width = 1
-    progress_bar_min_width = 150
-    progress_bar_max_width = 300
-    progress_bar_corner_radius = 0
-    progress_bar_corners = all
-    icon_corner_radius = 0
-    icon_corners = all
-    indicate_hidden = yes
-    transparency = 16
-    separator_height = 2
-    padding = 8
-    horizontal_padding = 8
-    text_icon_padding = 0
+    # border
     frame_width = 1
-#    frame_color = "#7f3fbf"
-    gap_size = 0
-    separator_color = auto
-    sort = yes
-    idle_threshold = 0
+    
 
     ### Text ###
-    font = Noto Sans Regular 9
-    line_height = 0
-    markup = full
-    format = "<b>%s</b>\n%b"
+
+    # Text Alignment
     alignment = left
     vertical_alignment = center
-    show_age_threshold = 60
-    ellipsize = middle
-    ignore_newline = no
-    stack_duplicates = true
-    hide_duplicate_count = true
-    show_indicators = no
+    padding = 16
+    horizontal_padding = 16
 
-    ### Icons ###
-    icon_position = left
-    min_icon_size = 0
-    max_icon_size = 32
-    icon_path = /usr/share/icons/Qogir/16/status:/usr/share/icons/Qogir/16/devices/:/usr/share/icons/Qogir/24/panel/:/usr/share/icons/Qogir/16/apps/:/usr/share/pixmaps/:/usr/share/icons/Qogir/scalable/apps/
+    # Alignment
+    origin = top-right
     
-    ### History ###
-    sticky_history = false
-    history_length = 0
 
-    ### Misc/Advanced ###
-    dmenu = /usr/bin/dmenu -p dunst:
-    browser = /usr/bin/xdg-open
-    always_run_script = true
-    title = Dunst
-    class = Dunst
-    corner_radius = 7
-    corners = all
-    ignore_dbusclose = false
+    # Font: Allow nerd Symbols, but fallback to Noto Sans.
+    font = "Symbols Nerd Font Mono 11, Noto Sans 11"
+    # Spacing between lines 
+    line_height = 0
+    # Markup parsing
+    markup = full
+    # Message format:
+    # %a - appname
+    # %s - summary
+    # %b - body
+    # %i - iconname (with path)
+    # %I - iconname (without path)
+    # %p - progress value (if set)
+    # %n - progress value no extra characters
+    # %% - literal %
+    
+    format = "<span foreground='#89b4fa'><b>%s</b></span>\n%b"
+    # format = "<span foreground='#7AA2F7'><b>%s</b></span>\n%b"
 
-    ### Legacy
-    force_xinerama = false
+    # Alternate using secondary colour (catppuccin sapphire) for title
+    #format = "<span foreground='#74c7ec'><b>%s</b></span>\n%b"
 
-    ### mouse
-    mouse_left_click = close_current
-    mouse_middle_click = do_action, close_current
-    mouse_right_click = close_all
+    # catppuccin mocha colours 
+    background = "#1e1e2eEE" # base (~93% opacity)
+    foreground = "#cdd6f4" # text
+    frame_color = "#89b4fa" # blue (primary)
 
-    frame_color = "#89b4fa"
-    separator_color= frame
-    highlight = "#89b4fa"
 
-[experimental]
-    per_monitor_dpi = false
+    ### Mouse ###
+
+    mouse_left_click = do_action
+    mouse_middle_click = close_current
+    mouse_right_click = close_current
+
+
+    ### Other ###
+    
+    # Sort messages by urgency
+    sort = yes
+    
+    # Show age of message if message is older than x seconds
+    show_age_threshold = 60
+
+    # Other
+    idle_threshold = 120
+
+    word_wrap = yes
+    ignore_newline = false
+    sticky_history = yes
+
+    separator_height = 2
+    separator_color = "#89b4fa"
+    
+
+    
 
 
 [urgency_low]
-    background = "#1e1e2e"
-    foreground = "#cdd6f4"
+    highlight = "#89b4fa"
     timeout = 5
-    icon = /usr/share/icons/Qogir/16/status/package-installed-outdated.svg
 
 [urgency_normal]
-background = "#1e1e2e"
-foreground = "#cdd6f4"
-    timeout = 5
-    override_pause_level = 30
-    icon = /usr/share/icons/Qogir/16/emblems/emblem-question.svg
+    highlight = "#89b4fa"
+    timeout = 20
 
 [urgency_critical]
-background = "#1e1e2e"
-foreground = "#cdd6f4"
-frame_color = "#fab387"
-    timeout = 120
-    icon = /usr/share/icons/Qogir/16/actions/dialog-warning.svg
+    frame_color = "#f38ba8" # Red
+    highlight = "#89b4fa"
+    timeout = 0
+    override_pause_level = 10
 
-[stack-volumes]
-    appname = "some_volume_notifiers"
-    set_stack_tag = "volume"
+[volume_notif]
+    appname = "dunstify"
+    category = "volume"
+    alignment = center
+    timeout = 1000
+    format = "<span foreground='#89b4fa' font='Symbols Nerd Font Mono 14'>%s</span>"
+    override_pause_level = 10
 
+[brightness_notif]
+    appname = "dunstify"
+    category = "brightness"
+    alignment = center
+    timeout = 1000
+    format = "<span font='Symbols Nerd Font Mono 16'>%s</span>"
+    override_pause_level = 10
+
+# Example overding pause level.
+# [Spotify]
+#     appname = "Spotify"
+#     background = "#FF0000"
+#     override_pause_level = 10
