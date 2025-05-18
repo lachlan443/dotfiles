@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# ~/.config/polybar/scripts/toggle_dnd.sh
-
 level=$(dunstctl get-pause-level)
 
 if [ "$level" -ge 10 ]; then
