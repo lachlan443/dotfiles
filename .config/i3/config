@@ -1,23 +1,16 @@
-# exec --no-startup-id ~/set_once.sh
-# This file is a modified version based on default i3-config-wizard config
-# source is available here:
-# https://raw.githubusercontent.com/endeavouros-team/endeavouros-i3wm-setup/main/etc/skel/.config/i3/config
-# Maintainer: joekamprad [joekamprad //a_t// endeavouros.com]
-# https://endeavouros.com
-#
-# iconic font icon search: https://fontawesome.com/v4.7/cheatsheet/
-#
-# --> to update this run the following command (will backup existing setup file)
-# wget --backups=1 https://raw.githubusercontent.com/endeavouros-team/endeavouros-i3wm-setup/main/etc/skel/.config/i3/config -P ~/.config/i3/
-#
-# Endeavouros-i3 config file
-# Source for complete framework of our i3 config and theming here: https://github.com/endeavouros-team/endeavouros-i3wm-setup
-# EndeavourOS wiki holds some Information also: https://discovery.endeavouros.com/window-tiling-managers/i3-wm/
-# Please see http://i3wm.org/docs/userguide.html for the official i3 reference!
+#   _  _____                       __  _         
+#  (_)|___ /    ___  ___   _ __   / _|(_)  __ _  
+#  | |  |_ \   / __|/ _ \ | '_ \ | |_ | | / _` | 
+#  | | ___) | | (__| (_) || | | ||  _|| || (_| | 
+#  |_||____/   \___|\___/ |_| |_||_|  |_| \__, | 
+#                                         |___/  
 
-#######################
-# config starts here: #
-#######################
+
+
+
+#####################
+# workspace layout: #
+#####################
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -25,7 +18,7 @@
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango: Noto Sans Regular 10
 
-# set the mod key to the winkey:
+# set the mod key to alt:
 set $mod Mod1
 
 #####################
@@ -96,23 +89,34 @@ bindsym $mod+Return exec --no-startup-id xfce4-terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# exit-menu
-bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/powermenu
-
-# Power Profiles menu switcher (rofi)
-bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
-
 ## App shortcuts
 bindsym $mod+F1 exec --no-startup-id /usr/bin/firefox
+# bindsym $mod+b exec --no-startup-id /usr/bin/firefox
 bindsym $mod+F2 exec --no-startup-id /usr/bin/dolphin
-bindsym Print exec --no-startup-id scrot ~/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png && notify-send "$(echo -e "Screenshot saved!\n ~/Pictures/Screenshots/$(date +"%Y-%m-%d-%T")-screenshot.png")"
+# bindsym $mod+c exec --no-startup-id /usr/bin/dolphin
+
+# TODO: Add left click functionality to open file in dolphin
+#       Right click to open in image viweer.
+
+bindsym Print exec --no-startup-id $HOME/.config/i3/scripts/screenshot.sh
 
 # Lock the system manually with $mod+l
 bindsym $mod+l exec --no-startup-id dm-tool lock
 
+# TODO: Add a warning when display is about to lock
+#       Fix standby while watching media
 # Lock automatically on suspend or idle
-# exec --no-startup-id xset s 300 5 #300 seconds, 5s fade time
-exec --no-startup-id xss-lock -- dm-tool lock
+exec_always --no-startup-id xset s off                  # Disable legacy screensaver
+exec_always --no-startup-id xset dpms 600 1800 1800     # Set DPMS times (in seconds) 
+                                                        # (standby, suspend, off)
+exec_always --no-startup-id xset -dpms                  # DISABLE DPMS
+exec_always --no-startup-id xss-lock -- dm-tool lock    # Sets the default locker.
+
+
+# Disable mouse acceleration using xset
+exec_always --no-startup-id xset m 1/1 0
+
+
 
 #old lock
 # Lock the system
@@ -135,6 +139,9 @@ bindsym F1 exec --no-startup-id ~/.config/i3/scripts/keyhint-2
 # Backlight setting using dunst osc
 bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh brightness_up
 bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh brightness_down
+
+
+
 
 # change focus ,  use the arrow keys:
 bindsym $mod+Left focus left
@@ -169,78 +176,53 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+d focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
-
+bindsym $mod+a focus parents
 # open new empty workspace
 bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/empty_workspace
 
+
+############################
 # Multimedia Keys
+###########################
 
-# volume, use meta keys showing osc using dunst
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh volume_up
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh volume_down
+set $volume_up $HOME/.config/i3/scripts/volume.sh up
+set $volume_down $HOME/.config/i3/scripts/volume.sh down
+set $toggle_mute $HOME/.config/i3/scripts/volume.sh mute
 
-# mute, use meta keys showing osc using dunst
-bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh volume_mute
-
-# audio control
-bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause 
-# Above line will also work for pausing
+# media keys, showing osc using dunst
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioStop exec --no-startup-id playerctl stop
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym XF86AudioRaiseVolume exec --no-startup-id $volume_up 
+bindsym XF86AudioLowerVolume exec --no-startup-id $volume_down
+bindsym XF86AudioMute exec --no-startup-id $toggle_mute
+# Shift for fine grained control
+bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id $volume_up 1
+bindsym Shift+XF86AudioLowerVolume exec --no-startup-id $volume_down 1
+
+
+# Add Alt + Function keys for same actions
+bindsym Mod1+F6 exec --no-startup-id playerctl previous
+bindsym Mod1+F7 exec --no-startup-id playerctl play-pause
+bindsym Mod1+F8 exec --no-startup-id playerctl next
+bindsym Mod1+F9 exec --no-startup-id playerctl stop
+bindsym Mod1+F10 exec --no-startup-id $toggle_mute
+bindsym Mod1+F11 exec --no-startup-id $volume_down 
+bindsym Mod1+F12 exec --no-startup-id $volume_up
+bindsym Mod1+Shift+F11 exec --no-startup-id $volume_down 1
+bindsym Mod1+Shift+F12 exec --no-startup-id $volume_up 1
+
+
+
+
+# audio control
+
 
 # Redirect sound to headphones
 bindsym $mod+p exec --no-startup-id /usr/local/bin/switch-audio-port
 
 
-##########################################
-# configuration for workspace behaviour: #
-##########################################
-
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
-
-# switch/iterate between workspaces
-bindsym $mod+Tab workspace next
-bindsym $mod+Shift+Tab workspace prev
-
-# switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-# bindsym $mod+0 workspace number $ws10
-bindsym $mod+0 exec --no-startup-id i3-msg "workspace number 10"; exec --no-startup-id spotify-launcher
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
-
-# bind program to workspace and focus to them on startup:
-assign [class="Spotify"] $ws10
 
 # automatic set focus new window if it opens on another workspace than the current:
 # for_window [class=Xfce4-terminal] focus
@@ -270,7 +252,7 @@ assign [class="Spotify"] $ws10
 # For modifications, it can be copied to ~/.config/picom/picom.conf or ~/.config/picom.conf
 # install picom package (yay -S picom)
 # start using default config 
-#exec_always --no-startup-id picom -b
+exec_always --no-startup-id picom -b
 #
 # for custom config:
 #exec_always --no-startup-id picom --config  ~/.config/picom.conf
@@ -295,7 +277,7 @@ exec --no-startup-id dex --autostart --environment i3
 # exec --no-startup-id ~/.screenlayout/monitor.sh
 
 # set wallpaper
-exec_always --no-startup-id sleep 1 && feh --bg-fill $HOME/.config/i3/wallpaper/current_wallpaper.jpg
+exec_always --no-startup-id sleep 1 && feh --bg-fill --randomize $HOME/.config/i3/wallpaper/active_wallpapers/*
 
 # set powersavings for display:
 # exec --no-startup-id xset s 480 dpms 600 600 600
@@ -309,11 +291,14 @@ exec_always --no-startup-id sleep 1 && feh --bg-fill $HOME/.config/i3/wallpaper/
 
 
 # Custom scripts.
-exec --no-startup-id sleep 5 && ~/.config/i3/scripts/fix_caps.sh # Caps lock delay fix
-exec --no-startup-id ~/.config/i3/scripts/set_mouse_dpi.sh # Disables acceleration too.
+exec_always --no-startup-id sleep 5 && ~/.config/i3/scripts/fix_caps.sh # Caps lock delay fix
+exec_always --no-startup-id ~/.config/i3/scripts/set_mouse_dpi.sh # Disables acceleration too.
 
 # background apps
-exec --no-startup-id 1password --silent
+# exec --no-startup-id 1password --silent
+exec --no-startup-id ~/.config/i3/autostart.sh
+
+
 
 # Desktop notifications
 # dunst config used ~/.config/dunst/dunstrc
@@ -331,6 +316,132 @@ exec --no-startup-id /usr/bin/dunst
 #exec_always --no-startup-id autotiling
 
 
+
+##########################################
+# configuration for workspace behaviour: #
+##########################################
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+
+# https://fontawesome.com/v4/cheatsheet/
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+# set $ws9 "9 "
+# set $ws10 "10 "
+
+# switch/iterate between workspaces
+# bindsym $mod+Tab workspace next
+# bindsym $mod+Shift+Tab workspace prev
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+# bindsym $mod+9 workspace number $ws9
+# bindsym $mod+0 workspace number $ws10
+bindsym $mod+9 exec --no-startup-id thunderbird, workspace number $ws9
+bindsym $mod+0 exec --no-startup-id spotify-launcher, workspace number $ws10
+
+bindsym $mod+Prior exec --no-startup-id thunderbird, workspace number $ws9
+bindsym $mod+Next exec --no-startup-id spotify-launcher, workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# bind program to workspace and focus to them on startup:
+assign [class="Spotify"] $ws10
+assign [class="thunderbird"] $ws9
+
+# Switch to spotify after launching
+for_window [urgent="latest" class="Spotify"] focus
+for_window [urgent="latest" class="thunderbird"] focus
+
+
+
+bindsym $mod+Tab workspace back_and_forth 
+bindsym $mod+Delete workspace back_and_forth 
+# workspace_auto_back_and_forth yes
+
+
+##################
+# floating rules #
+##################
+
+## Find class with "xprop | grep WM_CLASS"
+## Use second string (case sensitive)
+# Resize ordering (resize set width height)
+
+# all floating windows
+# for_window [class=".*"] move position center, resize set 640 480
+
+# floating windows by role
+for_window [window_role="About"] floating enable
+for_window [window_role="(?i)GtkFileChooserDialog"] resize set 640 480 #to set size of file choose dialog
+
+# floating windows by application
+for_window [class="Blueman-manager"] floating enable, resize set 640 720
+for_window [class="pavucontrol"] floating enable, resize set 640 720
+for_window [class="Nm-connection-editor"] floating enable
+
+for_window [class="1Password"] floating enable, resize set 1280 1000
+for_window [instance="Places" class="firefox"] floating enable
+for_window [instance="Msgcompose" class="thunderbird"] floating enable
+for_window [class="Xarchiver"] floating enable, resize set 1280 1000
+
+
+for_window [class="Lxappearance"] floating enable
+for_window [class="qt5ct"] floating enable
+for_window [class="qt6ct"] floating enable
+for_window [class="Arandr"] floating enable, resize set 1280 1000
+for_window [class="Nvidia-settings"] floating enable, resize set 1280 1000
+for_window [class="Galculator"] floating enable
+for_window [class="GParted"] floating enable
+for_window [class="Yad"] floating enable
+# for_window [class="xxx"] floating enable
+# for_window [class="xxx"] floating enable
+
+# for_window [urgent="latest" class="firefox"] focus
+
+
+
+
+
+
+# quick floating terminal
+bindsym $mod+Shift+Return exec --no-startup-id xfce4-terminal --role floating_term
+for_window [window_role=floating_term] floating enable, move position mouse
+
+
+
+
+#for_window [class="mpv"] sticky enable, fullscreen disable, floating enable, resize set 640 400, move position 1280 0
+
+
+
+
 ###############
 # system tray #
 ###############
@@ -346,36 +457,7 @@ exec --no-startup-id /usr/bin/dunst
 # clipman-applet
 #exec --no-startup-id xfce4-clipman
 
-##################
-# floating rules #
-##################
 
-# set floating (nontiling) for apps needing it
-for_window [class="Yad" instance="yad"] floating enable
-for_window [class="Galculator" instance="galculator"] floating enable
-for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
-
-# set floating (nontiling) for special apps
-for_window [class="Xsane" instance="xsane"] floating enable
-for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
-for_window [class="qt5ct" instance="qt5ct"] floating enable
-for_window [class="qt6ct" instance="qt6ct"] floating enable
-for_window [class="Pamac-manager"] floating enable
-for_window [window_role="About"] floating enable
-
-
-for_window [class="(?i)blueman"] floating enable
-
-
-# set border of floating window
-for_window [class="urxvt"] border pixel 1
-
-# set size of floating window
-for_window [window_role="(?i)GtkFileChooserDialog"] resize set 640 480 #to set size of file choose dialog
-#for_window [class=".*"] resize set 640 480 #to change size of all floating windows 
-
-# set position of floating window
-# for_window [class=".*"] move position center
 
 
 ######################################
@@ -403,49 +485,67 @@ client.focused_inactive		$darkblue	$darkblue	$grey		$black		$black
 client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
 
 ############################################
-# bar settings (input comes from i3blocks) #
+# bar settings (polybar) #
 ############################################
 
 # Set primary monitor
 exec --no-startup-id xrandr --output DP-0 --primary
 
-# Start i3bar to display a workspace bar
-# (plus the system information i3status finds out, if available)
-bar {
-    font pango: Noto Sans Regular 10
-    status_command i3blocks -c ~/.config/i3/i3blocks.conf
-    position bottom
-    # i3bar_command i3bar --transparency
-    # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
-    # reference: https://i3wm.org/docs/userguide.html#_tray_output
-    tray_output primary
-    tray_padding 0
 
-    # When strip_workspace_numbers is set to yes,
-    # any workspace that has a name of the form
-    # “[n][:][NAME]” will display only the name.
-    strip_workspace_numbers yes
-    # strip_workspace_name no
+exec_always --no-startup-id $HOME/.config/polybar/launch_polybar.sh &
 
-    colors {
-        separator          $purple
-        background         $darkgrey
-        statusline         $white
-        # border            bg      txt     indicator
-        focused_workspace  $mediumgrey      $grey   $darkgrey   $purple
-        active_workspace   $lightblue      $mediumgrey   $darkgrey   $purple
-        inactive_workspace $darkgrey       $darkgrey   $grey   $purple
-        urgent_workspace   $urgentred      $urgentred   $white  $purple
-    }
-}
+# exec_always --no-startup-id $HOME/.config/polybar/polybar.templates/docky/launch.sh &
+
+
+# bar {
+#     font pango: Noto Sans Regular 10
+#     status_command i3blocks -c ~/.config/i3/i3blocks.conf
+#     position bottom
+#     # i3bar_command i3bar --transparency
+#     # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
+#     # reference: https://i3wm.org/docs/userguide.html#_tray_output
+#     tray_output primary
+#     tray_padding 0
+
+#     # When strip_workspace_numbers is set to yes,
+#     # any workspace that has a name of the form
+#     # “[n][:][NAME]” will display only the name.
+#     strip_workspace_numbers yes
+#     # strip_workspace_name no
+
+#     colors {
+#         separator          $purple
+#         background         $darkgrey
+#         statusline         $white
+#         # border            bg      txt     indicator
+#         focused_workspace  $mediumgrey      $grey   $darkgrey   $purple
+#         active_workspace   $lightblue      $mediumgrey   $darkgrey   $purple
+#         inactive_workspace $darkgrey       $darkgrey   $grey   $purple
+#         urgent_workspace   $urgentred      $urgentred   $white  $purple
+#     }
+# }
 
 
 #####################################
 
 ## rofi bindings fancy application menu ($mod+d /F9 optional disabled)
 
-bindsym $mod+space exec --no-startup-id rofi -modi drun -show drun \
-		-config ~/.config/rofi/rofidmenu.rasi
+# bindsym $mod+space exec --no-startup-id rofi -modi drun -show drun \
+# 		-config ~/.config/rofi/rofidmenu.rasi
+
+bindsym $mod+space exec --no-startup-id $HOME/.config/rofi/launchers/type-1/launcher.sh
+
+
+# power-menu
+# bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/powermenu
+bindsym $mod+Shift+e exec --no-startup-id ~/.config/rofi/powermenu/type-1/powermenu.sh
+
+
+# Power Profiles menu switcher
+bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
+
+
+
 
 ## rofi bindings for window menu ($mod+t /F10 optional disabled)
 

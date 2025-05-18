@@ -7,6 +7,3 @@ mice=$(ratbagctl list | grep -o '^[^:]*')
 for mouse in $mice; do
   ratbagctl "$mouse" dpi set 800
 done
-
-# Disable mouse acceleration using xset
-xset m 1/1 0
