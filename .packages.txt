@@ -13,7 +13,7 @@ ttf-jetbrains-mono-nerd      # replaced, but might still be in use somewhere
 stalonetray         # stand alone system tray
 xdo                 # used for popup systray
 xclip               # used for copy paste in rofi calc
-
+xfce4-power-manager # laptop
 
 # CLI Tools
 htop            # system monitor
