@@ -8,7 +8,7 @@ piper               # mouse dpi
 lxappearance        # gtk colours
 qt5ct               # qt colours
 qt6ct               # qt colours
-tff-nerf-fonts-symbols-mono  # nerd icons
+ttf-nerd-fonts-symbols-mono  # nerd icons
 ttf-jetbrains-mono-nerd      # replaced, but might still be in use somewhere
 stalonetray         # stand alone system tray
 xdo                 # used for popup systray
@@ -19,7 +19,7 @@ xclip               # used for copy paste in rofi calc
 htop            # system monitor
 curl            # transfer data from URLs
 tree            # displays directory trees
-neofetch        # system info
+#neofetch        # system info
 ncdu            # disk usage (per folder)
 dysk            # easier to read than df -h
 xorg-xwininfo   # window size in pixels
