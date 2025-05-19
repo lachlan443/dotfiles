@@ -2,21 +2,17 @@
 blueman             # bluetooth
 brightnessctl       # brightness
 pasystray           # pulse audio system tray
+picom               # compositor
+polybar             # bar
 piper               # mouse dpi
-
-
-# other
-starship                    # terminal prompt
-ttf-jetbrains-mono-nerd     # nerd font icons for terminal 
-dolphin                     # files
-konsole			            # not used, but stops warning in dolphin
-kservice5			        # for dolphin
-xdg-desktop-portal-kde      # for dolphin file association
-# archlinux-xdg-menu          # dolphin file association fallback
-spotify-launcher
-#chromium
-code
-github-cli
+lxappearance        # gtk colours
+qt5ct               # qt colours
+qt6ct               # qt colours
+tff-nerf-fonts-symbols-mono  # nerd icons
+ttf-jetbrains-mono-nerd      # replaced, but might still be in use somewhere
+stalonetray         # stand alone system tray
+xdo                 # used for popup systray
+xclip               # used for copy paste in rofi calc
 
 
 # CLI Tools
@@ -24,8 +20,40 @@ htop            # system monitor
 curl            # transfer data from URLs
 tree            # displays directory trees
 neofetch        # system info
-ncdu            # disk usage
+ncdu            # disk usage (per folder)
+dysk            # easier to read than df -h
+xorg-xwininfo   # window size in pixels
+xcolor          # colour picker
 
-# GUI Utilities
+
+# other
+starship                    # terminal prompt
+dolphin                     # files
+konsole			            # not used, but stops warning in dolphin
+kservice5			        # for dolphin
+xdg-desktop-portal-kde      # for dolphin file association
+# archlinux-xdg-menu          # dolphin file association fallback
+spotify-launcher
+code
+github-cli
+thunderbird
+obsidian
 gparted         # partition editor
 vlc             # media player
+lazygit         # git gui
+rofi-calc       # calculator
+gwenview        # image viewer
+
+
+
+
+
+
+
+
+
+# AUR packages
+# 1password
+# plex-desktop
+# qdiskinfo
+# zscroll-git
