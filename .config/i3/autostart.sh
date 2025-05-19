@@ -10,3 +10,5 @@ fi
 
 # Start background apps
 1password --silent &
+
+xfce4-power-manager &

@@ -129,7 +129,7 @@
     category = "brightness"
     alignment = center
     timeout = 1000
-    format = "<span font='Symbols Nerd Font Mono 16'>%s</span>"
+    format = "<span foreground='#89b4fa' font='Symbols Nerd Font Mono 14'>%s</span>"
     override_pause_level = 10
 
 # Example overding pause level.

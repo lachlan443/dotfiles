@@ -2,7 +2,7 @@
 # original source: https://gitlab.com/Nmoleo/i3-volume-brightness-indicator
 
 # Default to 10 if no input
-volume_step=${2:-10}
+brightness_step=${2:-10}
 notification_timeout=1000
 
 
@@ -54,7 +54,7 @@ case $1 in
         if [ $(( brightness + brightness_step )) -gt 100 ]; then
             brightnessctl set 100%
         else
-            brightnessctl set +${brightness_step}%
+            brightnessctl set ${brightness_step}%+
         fi
         show_brightness_notif
         ;;

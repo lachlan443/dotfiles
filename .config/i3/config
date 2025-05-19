@@ -134,13 +134,6 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 
-# Backlight setting using dunst osc
-bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh brightness_up
-bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh brightness_down
-
-
-
-
 # change focus ,  use the arrow keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -186,6 +179,8 @@ bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/empty_workspace
 set $volume_up $HOME/.config/i3/scripts/volume.sh up
 set $volume_down $HOME/.config/i3/scripts/volume.sh down
 set $toggle_mute $HOME/.config/i3/scripts/volume.sh mute
+set $bright_up $HOME/.config/i3/scripts/brightness.sh up
+set $bright_down $HOME/.config/i3/scripts/brightness.sh down
 
 # media keys, showing osc using dunst
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
@@ -200,6 +195,8 @@ bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id $volume_up 1
 bindsym Shift+XF86AudioLowerVolume exec --no-startup-id $volume_down 1
 
 
+
+
 # Add Alt + Function keys for same actions
 bindsym Mod1+F6 exec --no-startup-id playerctl previous
 bindsym Mod1+F7 exec --no-startup-id playerctl play-pause
@@ -211,6 +208,11 @@ bindsym Mod1+F12 exec --no-startup-id $volume_up
 bindsym Mod1+Shift+F11 exec --no-startup-id $volume_down 1
 bindsym Mod1+Shift+F12 exec --no-startup-id $volume_up 1
 
+# Backlight setting using dunst osc
+bindsym XF86MonBrightnessUp exec --no-startup-id $bright_up
+bindsym XF86MonBrightnessDown exec --no-startup-id $bright_down
+bindsym Shift+XF86MonBrightnessUp exec --no-startup-id $bright_up 1
+bindsym Shift+XF86MonBrightnessDown exec --no-startup-id $bright_down 1
 
 
 
