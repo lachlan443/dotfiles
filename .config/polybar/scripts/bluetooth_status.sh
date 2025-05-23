@@ -11,10 +11,10 @@ num_connected_devices=$(bluetoothctl devices | cut -d ' ' -f2 | while read -r ma
 done | wc -l)
 
 if [[ "$num_connected_devices" -gt 0 ]]; then
-    echo "%{A1:blueman-manager &:}$bluetooth_icon%{A}"
+    echo $bluetooth_icon
     # echo "%{A1:blueman-manager &:}$bluetooth_icon ($num_connected_devices)%{A}"
 else
-    echo "%{A1:blueman-manager &:}$disconnected_icon%{A}"
+    echo $disconnected_icon
 fi
 
 
