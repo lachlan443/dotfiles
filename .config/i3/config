@@ -396,6 +396,10 @@ bindsym $mod+Delete workspace back_and_forth
 
 # all floating windows
 # for_window [class=".*"] move position center, resize set 640 480
+# for_window [class=".*"] move position center
+
+# Move all floating windows, EXCEPT stalonetray to the centre.
+for_window [class="^(?!stalonetray$).*"] move position center
 
 # floating windows by role
 for_window [window_role="About"] floating enable
@@ -417,8 +421,10 @@ for_window [class="pavucontrol"] floating enable, resize set 640 720
 for_window [class="Nm-connection-editor"] floating enable
 
 for_window [class="1Password"] floating enable, resize set 1280 1000
+for_window [class="stalonetray"] floating enable, move position
+
 for_window [instance="Places" class="firefox"] floating enable
-for_window [instance="Msgcompose" class="thunderbird"] floating enable
+for_window [instance="Msgcompose" class="thunderbird"] floating enable, resize set 956 1000
 for_window [class="Xarchiver"] floating enable, resize set 1280 1000
 
 
@@ -515,6 +521,8 @@ bindsym $mod+space exec --no-startup-id $HOME/.config/rofi/launcher.sh
 # power-menu
 # bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/powermenu
 bindsym $mod+Shift+e exec --no-startup-id ~/.config/rofi/powermenu.sh
+bindsym $mod+Shift+a exec --no-startup-id ~/.config/rofi/audio_switcher.sh
+bindsym $mod+Shift+b exec --no-startup-id ~/.config/rofi/bluetooth.sh
 
 # Power Profiles menu switcher
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
