@@ -1,111 +1,80 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-## Author : Aditya Shakya (adi1090x)
-## Github : @adi1090x
-#
-## Rofi   : Power Menu
+theme=$HOME/.config/rofi/powermenu/powermenu.rasi
 
-
-# CMDs
-uptime="`uptime -p | sed -e 's/up //g'`"
-host=`hostname`
 
 # Options
-shutdown=' Shutdown'
-reboot=' Reboot'
-lock=' Lock'
-suspend=' Suspend'
-logout=' Logout'
-yes=' Yes'
-no=' No'
+ shutdown='  Shutdown'
+   reboot='  Reboot'
+     lock='  Lock'
+  suspend='  Suspend'
+hibernate='  Hibernate'
+   logout='  Logout'
+
+# Rofi CMD for normal mode
+rofi_cmd() {
+    rofi -dmenu \
+        -selected-row 2 \
+        -theme $theme
+}
+
 
 # Rofi CMD
 rofi_cmd() {
 	rofi -dmenu \
-		-p "Uptime: $uptime" \
-		-theme $HOME/.config/rofi/powermenu.rasi
+		-selected-row 2 \
+        -mesg "test" \
+		-theme $theme
 }
 
-
-# # Rofi CMD
-# rofi_cmd() {
-# 	rofi -dmenu \
-# 		-p "$host" \
-# 		-mesg "Uptime: $uptime" \
-# 		-theme ${dir}/${theme}.rasi
-# }
-
-# Confirmation CMD
-confirm_cmd() {
-	rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 250px;}' \
-		-theme-str 'mainbox {children: [ "message", "listview" ];}' \
-		-theme-str 'listview {columns: 2; lines: 1;}' \
-		-theme-str 'element-text {horizontal-align: 0.5;}' \
-		-theme-str 'textbox {horizontal-align: 0.5;}' \
-		-dmenu \
-		-p 'Confirmation' \
-		-mesg 'Are you Sure?' \
-		-theme $HOME/.config/rofi/powermenu.rasi
+# Rofi CMD for taskbar mode (override theme for SE location)
+rofi_cmd_taskbar() {
+    rofi -dmenu \
+        -selected-row 2 \
+		-theme $theme \
+        -theme-str 'window {location: southeast; anchor: southeast; fullscreen: false; width: 10%; y-offset: -60px;}'
 }
 
-# Ask for confirmation
-confirm_exit() {
-	echo -e "$yes\n$no" | confirm_cmd
-}
 
 # Pass variables to rofi dmenu
 run_rofi() {
-	echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | rofi_cmd
+	echo -e "$logout\n$suspend\n$lock\n$reboot\n$shutdown\n$hibernate" | rofi_cmd
+}
+run_rofi_taskbar() {
+	echo -e "$logout\n$suspend\n$lock\n$reboot\n$shutdown\n$hibernate" | rofi_cmd_taskbar
 }
 
-# Execute Command
-run_cmd() {
-	selected="$(confirm_exit)"
-	if [[ "$selected" == "$yes" ]]; then
-		if [[ $1 == '--shutdown' ]]; then
-			systemctl poweroff
-		elif [[ $1 == '--reboot' ]]; then
-			systemctl reboot
-		elif [[ $1 == '--suspend' ]]; then
-			mpc -q pause
-			amixer set Master mute
-			systemctl suspend
-		elif [[ $1 == '--logout' ]]; then
-			if [[ "$DESKTOP_SESSION" == 'openbox' ]]; then
-				openbox --exit
-			elif [[ "$DESKTOP_SESSION" == 'bspwm' ]]; then
-				bspc quit
-			elif [[ "$DESKTOP_SESSION" == 'i3' ]]; then
-				i3-msg exit
-			elif [[ "$DESKTOP_SESSION" == 'plasma' ]]; then
-				qdbus org.kde.ksmserver /KSMServer logout 0 0 0
-			fi
-		fi
-	else
-		exit 0
-	fi
-}
+
+# Parse argument: if --taskbar, use taskbar mode; else normal
+if [[ "$1" == "--taskbar" ]]; then
+    chosen="$(run_rofi_taskbar)"
+else
+    chosen="$(run_rofi)"
+fi
 
 # Actions
-chosen="$(run_rofi)"
+# chosen="$(run_rofi)"
 case ${chosen} in
     $shutdown)
-		run_cmd --shutdown
+		systemctl poweroff
         ;;
     $reboot)
-		run_cmd --reboot
+		systemctl reboot
         ;;
     $lock)
-		if [[ -x '/usr/bin/betterlockscreen' ]]; then
-			betterlockscreen -l
-		elif [[ -x '/usr/bin/i3lock' ]]; then
-			i3lock
-		fi
+		dm-tool lock
         ;;
     $suspend)
-		run_cmd --suspend
+		playerctl pause
+		amixer set Master mute
+		systemctl suspend
         ;;
     $logout)
-		run_cmd --logout
+		i3-msg exit
         ;;
+	$hibernate)
+		playerctl pause
+		amixer set Master mute
+		systemctl hibernate
+		;;
 esac
