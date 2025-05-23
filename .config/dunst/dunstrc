@@ -99,12 +99,10 @@
     separator_color = "#89b4fa"
     
 
-    
-
 
 [urgency_low]
     highlight = "#89b4fa"
-    timeout = 5
+    timeout = 3
 
 [urgency_normal]
     highlight = "#89b4fa"
