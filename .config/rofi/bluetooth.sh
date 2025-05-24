@@ -1,10 +1,10 @@
 #!/bin/bash
 
 theme="$HOME/.config/rofi/bluetooth/bluetooth.rasi"
-# icon_device_con=""
-# icon_device_discon=""
-icon_device_con="󰂰"
-icon_device_discon="󰂲"
+icon_device_con=""
+icon_device_discon=""
+# icon_device_con="󰂰"
+# icon_device_discon="󰂲"
 display_list=()     # This list is used for frontend in rofi
 mac_addr_list=()    # This list is used for backend connectivity with MAC addresses.
 rofi_mesg="Bluetooth status unknown."
