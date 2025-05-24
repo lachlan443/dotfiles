@@ -18,15 +18,6 @@ rofi_cmd() {
         -theme $theme
 }
 
-
-# Rofi CMD
-rofi_cmd() {
-	rofi -dmenu \
-		-selected-row 2 \
-        -mesg "test" \
-		-theme $theme
-}
-
 # Rofi CMD for taskbar mode (override theme for SE location)
 rofi_cmd_taskbar() {
     rofi -dmenu \
