@@ -11,8 +11,9 @@ configuration {
 /*****----- Global Properties -----*****/
 @import                          "colours/catppuccin.rasi"
 
+
 * {
-    font: "Symbols Nerd Font Mono 12, Noto Sans 12";
+    font: "feather 12, Noto Sans 12";
 }
 
 /*****----- Main Window -----*****/
