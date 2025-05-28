@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir -p $HOME/.dotfiles
 git clone --bare https://github.com/lachlan443/dotfiles.git $HOME/.dotfiles
 function config {
    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME "$@"
