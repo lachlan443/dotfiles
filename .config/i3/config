@@ -20,8 +20,9 @@ font pango:Noto Sans Regular 10
 # If stuck with a 60 second loading cursor
 # Then add --no-startup-id to that application.
 
-bindsym $mod+Shift+b exec firefox
-bindsym $mod+Shift+d exec dolphin
+bindsym $mod+b exec firefox
+bindsym $mod+d exec dolphin
+bindsym $mod+o exec obsidian
 bindsym $mod+Return exec kitty
 
 
