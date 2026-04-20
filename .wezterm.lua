@@ -4,34 +4,23 @@ local wezterm = require 'wezterm'
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
+--config.font_size = 12.0
+config.font = wezterm.font('JetBrains Mono')
+--config.font_size = 12.0
 
-
---config.color_scheme = 'Tokyo Night'
 config.hide_tab_bar_if_only_one_tab = true
-config.color_scheme = 'Tokyo Night'
-config.colors = {
-   foreground = "#FFFFFF", -- white font color
-}
-
-
+config.color_scheme = 'Catppuccin Mocha'
+-- config.colors = {
+--    foreground = "#FFFFFF", -- white font color
+-- }
 local act = wezterm.action
 
 config.keys = {
-  -- Rebind OPT-Left, OPT-Right as ALT-b, ALT-f respectively to match Terminal.app behavior
   {
-    key = 'LeftArrow',
+    key = 'Enter',
     mods = 'OPT',
-    action = act.SendKey {
-      key = 'b',
-      mods = 'ALT',
-    },
-  },
-  {
-    key = 'RightArrow',
-    mods = 'OPT',
-    action = act.SendKey { key = 'f', mods = 'ALT' },
+    action = act.SendKey { key = 'Enter', mods = 'SHIFT'  }, -- send a normal newline
   },
 }
-
 
 return config
