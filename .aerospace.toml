@@ -265,6 +265,10 @@ run = 'move-node-to-workspace 2'
 if.app-id = 'com.apple.finder'
 run = 'layout floating'
 
+[[on-window-detected]]
+if.app-id = 'com.apple.MobileSMS'
+run = 'layout floating'
+
 [workspace-to-monitor-force-assignment]
     A = '^built-in retina display$'
     B = '^built-in retina display$'
